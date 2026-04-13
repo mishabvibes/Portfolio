@@ -7,13 +7,20 @@ import {
   Code2,
   Frame,
   SearchCheck,
-  Eye,
   MonitorSmartphone,
   Smartphone,
-  Globe,
   Linkedin,
   Github,
-  MessageCircle,
+  Mail,
+  MapPin,
+  Briefcase,
+  GraduationCap,
+  ExternalLink,
+  CheckCircle2,
+  Database,
+  Server,
+  Layout,
+  UsersRound,
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import Spline from "@splinetool/react-spline";
@@ -38,74 +45,150 @@ const aboutStats = [
   { label: "Projects delivered", value: "20+" },
 ];
 
+const techStack = [
+  { name: "React", category: "Frontend" },
+  { name: "Next.js", category: "Frontend" },
+  { name: "TypeScript", category: "Frontend" },
+  { name: "Tailwind CSS", category: "Frontend" },
+  { name: "Node.js", category: "Backend" },
+  { name: "Python", category: "Backend" },
+  { name: "Django", category: "Backend" },
+  { name: "PostgreSQL", category: "Database" },
+  { name: "MongoDB", category: "Database" },
+  { name: "React Native", category: "Mobile" },
+  { name: "Expo", category: "Mobile" },
+  { name: "Docker", category: "DevOps" },
+];
+
+const experience = [
+  {
+    role: "Freelance Full-Stack Developer",
+    company: "DigiBayt",
+    period: "2023 – Present",
+    desc: "Designed and developed full-stack web & mobile applications for clients across various industries. Delivered 20+ projects including e-commerce platforms, portals, and content apps.",
+    icon: Briefcase,
+  },
+  {
+    role: "Python Full Stack Developer Trainee",
+    company: "Inmakes Infotech Pvt Ltd",
+    period: "2022 – 2023",
+    desc: "Intensive hands-on training in Python full-stack development covering Django, REST APIs, databases, and deployment workflows.",
+    icon: GraduationCap,
+  },
+  {
+    role: "Media Coordinator & Leadership Member",
+    company: "Noorul Ulama — Jamia Nooriyya Arabiyya Pattikkad Students Union",
+    period: "2024 – 2026",
+    desc: "Contributed to institutional media management and coordination within the college students union. Led media initiatives, managed digital communications, and held a leadership role representing the student body.",
+    icon: UsersRound,
+  },
+];
+
 const projects = [
   {
     title: "AIC Amal",
-    description: "Full-featured web platform for AIC Amal — available on Play Store & App Store",
+    description: "Full-featured web & mobile platform",
     image: "/assets/aicamal.webm",
     href: "https://aicamal.app",
     badge: "Web + App",
   },
   {
     title: "MIC Online Admission",
-    description: "Online admission portal for MIC — streamlined application and management system",
+    description: "Admission portal & management system",
     image: "/assets/micasas.webm",
     href: "https://admission.miconline.org",
     badge: "Web",
   },
   {
     title: "Al Naseem",
-    description: "Al Naseem Mahirul Quran platform — available on Play Store & App Store",
+    description: "Mahirul Quran learning platform",
     image: "/assets/alnaseem.webm",
     href: "https://alnaseem.app",
     badge: "Web + App",
   },
   {
     title: "The Open Book Hira",
-    description: "Digital reading & content platform for The Open Book Hira",
+    description: "Digital reading & content platform",
     image: "/assets/theopenbook.webm",
     href: "https://www.theopenbookhira.com",
     badge: "Web",
   },
   {
     title: "Rahat Ayurvedic",
-    description: "Modern Ayurvedic brand website with product showcase and inquiry system",
+    description: "Brand website with product showcase",
     image: "/assets/rahathayurvedic.webm",
     href: "https://rahathayurvedic.vercel.app",
     badge: "Web",
-  }
+  },
 ];
 
 const services = [
   {
     service: "Frontend Development",
     description:
-      "Creating stellar user interfaces and web experiences using the latest technologies.",
-    icon: Code2,
+      "Pixel-perfect, performant UIs using React, Next.js and Tailwind CSS that delight users on every device.",
+    icon: Layout,
   },
   {
-    service: "UX Design",
+    service: "Backend & APIs",
     description:
-      "Building intuitive, user-centric designs that drive engagement and conversion.",
-    icon: Frame,
+      "Scalable REST and real-time APIs with Node.js, Python/Django backed by SQL and NoSQL databases.",
+    icon: Server,
   },
   {
-    service: "SEO Optimization",
+    service: "Mobile Apps",
     description:
-      "Enhancing your website's visibility in search engines for increased organic traffic.",
-    icon: SearchCheck,
+      "Cross-platform iOS & Android apps using React Native and Expo — from prototype to store listing.",
+    icon: Smartphone,
+  },
+  {
+    service: "Database Design",
+    description:
+      "Schema design, query optimisation, and migration strategies for PostgreSQL, MongoDB and Supabase.",
+    icon: Database,
   },
   {
     service: "Responsive Design",
     description:
-      "Designing websites that look and perform equally well on all devices and screen sizes.",
+      "Mobile-first layouts that look and perform equally well across all screen sizes and devices.",
     icon: MonitorSmartphone,
   },
   {
-    service: "Backend Development",
+    service: "SEO Optimisation",
     description:
-      "Developing robust, scalable server-side logic for a wide range of web applications.",
-    icon: Eye,
+      "Core Web Vitals, semantic HTML, and meta strategies to increase organic visibility and ranking.",
+    icon: SearchCheck,
+  },
+];
+
+const contactLinks = [
+  {
+    label: "Email",
+    value: "md.mishab124@gmail.com",
+    href: "mailto:md.mishab124@gmail.com",
+    icon: Mail,
+    primary: true,
+  },
+  {
+    label: "WhatsApp",
+    value: "+91 62386 61924",
+    href: "https://wa.me/916238661924",
+    icon: Smartphone,
+    primary: false,
+  },
+  {
+    label: "LinkedIn",
+    value: "mishab-nk",
+    href: "https://www.linkedin.com/in/mishab-nk",
+    icon: Linkedin,
+    primary: false,
+  },
+  {
+    label: "GitHub",
+    value: "mishabvibes",
+    href: "https://github.com/mishabvibes",
+    icon: Github,
+    primary: false,
   },
 ];
 
@@ -142,10 +225,8 @@ export default function Home() {
 
       navLinks.forEach((li) => {
         li.classList.remove("nav-active");
-
         if (li.getAttribute("href") === `#${current}`) {
           li.classList.add("nav-active");
-          console.log(li.getAttribute("href"));
         }
       });
     }
@@ -187,25 +268,31 @@ export default function Home() {
       <div ref={refScrollContainer}>
         <Gradient />
 
-        {/* Intro */}
+        {/* ── Hero ── */}
         <section
           id="home"
           data-scroll-section
           className="mt-40 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
         >
           <div className={styles.intro}>
+            {/* Status + location badges */}
             <div
               data-scroll
               data-scroll-direction="horizontal"
               data-scroll-speed=".09"
-              className="flex flex-row items-center space-x-1.5"
+              className="flex flex-wrap items-center gap-2"
             >
-              <span className={styles.pill}>Next.js</span>
-              <span className={styles.pill}>react</span>
-              <span className={styles.pill}>node.js</span>
-              <span className={styles.pill}>python</span>
+              <span className="flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
+                Available for work
+              </span>
+              <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground">
+                <MapPin className="h-3 w-3" /> Kerala, India
+              </span>
             </div>
-            <div>
+
+            {/* Name */}
+            <div className="mt-6">
               <h1
                 data-scroll
                 data-scroll-enable-touch-speed
@@ -224,27 +311,48 @@ export default function Home() {
                 data-scroll
                 data-scroll-enable-touch-speed
                 data-scroll-speed=".06"
-                className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
+                className="mt-3 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
               >
-                A Full-Stack Web Developer based in Kerala, India, combining strong technical skills with expertise in digital tools, media management, and academic technology integration.
+                Full-Stack Web & Mobile Developer — I build fast, scalable, and
+                user-focused digital products using{" "}
+                <span className="text-foreground">React</span>,{" "}
+                <span className="text-foreground">Node.js</span>, and{" "}
+                <span className="text-foreground">Python</span>.
               </p>
             </div>
+
+            {/* Tech pills */}
+            <div
+              data-scroll
+              data-scroll-speed=".06"
+              className="mt-4 flex flex-wrap gap-2"
+            >
+              {["React", "Next.js", "Node.js", "Python", "React Native"].map(
+                (t) => (
+                  <span key={t} className={styles.pill}>
+                    {t}
+                  </span>
+                ),
+              )}
+            </div>
+
+            {/* CTAs */}
             <span
               data-scroll
               data-scroll-enable-touch-speed
               data-scroll-speed=".06"
-              className="flex flex-row items-center space-x-1.5 pt-6"
+              className="mt-6 flex flex-row items-center space-x-2"
             >
               <Link href="mailto:md.mishab124@gmail.com" passHref>
-                <Button>
-                  Get in touch <ChevronRight className="ml-1 h-4 w-4" />
+                <Button className="gap-2">
+                  Get in touch <ChevronRight className="h-4 w-4" />
                 </Button>
               </Link>
               <Button
                 variant="outline"
-                onClick={() => scrollTo(document.querySelector("#about"))}
+                onClick={() => scrollTo(document.querySelector("#projects"))}
               >
-                Learn more
+                View projects
               </Button>
             </span>
 
@@ -258,6 +366,7 @@ export default function Home() {
               <TriangleDownIcon className="mt-1 animate-bounce" />
             </div>
           </div>
+
           <div
             data-scroll
             data-scroll-speed="-.01"
@@ -270,38 +379,107 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About */}
+        {/* ── About ── */}
         <section id="about" data-scroll-section>
           <div
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
+            className="my-10 flex max-w-6xl flex-col justify-start space-y-16"
           >
-            <h2 className="py-16  pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]">
-              I am a Full-Stack Web Developer based in Kerala, India, with experience in building modern web and mobile applications using technologies like React, Node.js, and Python. I have worked as a freelance developer at DigiBayt and trained as a Python Full Stack Developer at Inmakes Infotech Pvt Ltd, gaining hands-on experience in real-world development. Alongside my technical work, I have contributed to institutional environments through media coordination and leadership roles. Currently, I am a continuous learner, passionate about creating efficient, user-focused digital solutions.
-            </h2>
-            <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
-              {aboutStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex flex-col items-center text-center xl:items-start xl:text-start"
-                >
-                  <span className="clash-grotesk text-gradient text-4xl font-semibold tracking-tight xl:text-6xl">
-                    {stat.value}
+            {/* Headline + stats */}
+            <div className="space-y-10">
+              <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+                👤 About me
+              </span>
+              <h2 className="pt-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]">
+                I&apos;m a{" "}
+                <span className="text-gradient clash-grotesk font-semibold">
+                  Full-Stack Developer
+                </span>{" "}
+                based in Kerala, India — passionate about building efficient,
+                user-focused digital solutions that bridge technology and
+                real-world needs.
+              </h2>
+
+              <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
+                {aboutStats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex flex-col items-center text-center xl:items-start xl:text-start"
+                  >
+                    <span className="clash-grotesk text-gradient text-4xl font-semibold tracking-tight xl:text-6xl">
+                      {stat.value}
+                    </span>
+                    <span className="tracking-tight text-muted-foreground xl:text-lg">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tech stack */}
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                Tech Stack
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {techStack.map((tech) => (
+                  <span
+                    key={tech.name}
+                    className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm font-medium text-foreground backdrop-blur transition hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {tech.name}
                   </span>
-                  <span className="tracking-tight text-muted-foreground xl:text-lg">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Experience timeline */}
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                Experience
+              </h3>
+              <div className="space-y-4">
+                {experience.map((exp, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.15, duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="flex gap-4 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-primary/30 hover:bg-white/8"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <exp.icon size={18} />
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-semibold text-foreground">
+                          {exp.role}
+                        </span>
+                        <span className="rounded-full bg-primary/20 px-2.5 py-0.5 text-xs font-medium text-primary">
+                          {exp.company}
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        {exp.period}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {exp.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Projects */}
+        {/* ── Projects ── */}
         <section id="projects" data-scroll-section>
-          {/* Gradient */}
+          {/* gradient */}
           <div className="relative isolate -z-10">
             <div
               className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
@@ -316,16 +494,17 @@ export default function Home() {
               />
             </div>
           </div>
-          <div data-scroll data-scroll-speed=".4" className="my-64">
+
+          <div data-scroll data-scroll-speed=".4" className="my-20">
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
-              ✨ Projects
+              🚀 Projects
             </span>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-              Streamlined digital experiences.
+            <h2 className="mt-3 text-4xl font-semibold tracking-tighter xl:text-6xl">
+              Work I&apos;m proud of.
             </h2>
-            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              I&apos;ve worked on a variety of projects, from small websites to
-              large-scale web applications. Here are some of my favorites:
+            <p className="mt-2 max-w-xl text-base tracking-tight text-muted-foreground xl:text-lg">
+              A selection of real-world products I&apos;ve shipped — from
+              consumer apps on the Play Store to institutional web platforms.
             </p>
 
             {/* Carousel */}
@@ -333,33 +512,45 @@ export default function Home() {
               <Carousel setApi={setCarouselApi} className="w-full">
                 <CarouselContent>
                   {projects.map((project) => (
-                    <CarouselItem key={project.title} className="md:basis-1/2">
-                      <Card id="tilt">
+                    <CarouselItem
+                      key={project.title}
+                      className="md:basis-1/2 lg:basis-1/2"
+                    >
+                      <Card id="tilt" className="group overflow-hidden">
                         <CardHeader className="p-0">
-                          <Link href={project.href} target="_blank" passHref>
-                            {project.image.endsWith(".webm") ? (
-                              <video
-                                src={project.image}
-                                autoPlay
-                                loop
-                                muted
-                                className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                              />
-                            ) : (
-                              <Image
-                                src={project.image}
-                                alt={project.title}
-                                width={600}
-                                height={300}
-                                quality={100}
-                                className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                              />
-                            )}
+                          <Link
+                            href={project.href}
+                            target="_blank"
+                            passHref
+                            className="relative block"
+                          >
+                            {/* video */}
+                            <video
+                              src={project.image}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="aspect-video h-full w-full rounded-t-md bg-primary object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            />
+                            {/* badge overlay */}
+                            <span className="absolute right-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+                              {project.badge}
+                            </span>
+                            {/* visit link icon */}
+                            <span className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-black/60 px-3 py-1 text-xs text-white/70 opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
+                              <ExternalLink className="h-3 w-3" /> Visit
+                            </span>
                           </Link>
                         </CardHeader>
-                        <CardContent className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                          <CardTitle className="border-t border-white/5 p-4 text-base font-normal tracking-tighter">
-                            {project.description}
+                        <CardContent className="absolute bottom-0 w-full bg-background/70 backdrop-blur">
+                          <CardTitle className="border-t border-white/10 px-4 py-3">
+                            <span className="block text-base font-semibold tracking-tight text-foreground">
+                              {project.title}
+                            </span>
+                            <span className="mt-0.5 block text-xs font-normal tracking-tight text-muted-foreground">
+                              {project.description}
+                            </span>
                           </CardTitle>
                         </CardContent>
                       </Card>
@@ -369,103 +560,135 @@ export default function Home() {
                 <CarouselPrevious />
                 <CarouselNext />
               </Carousel>
-              <div className="py-2 text-center text-sm text-muted-foreground">
-                <span className="font-semibold">
-                  {current} / {count}
-                </span>{" "}
-                projects
+              <div className="py-3 text-center text-sm text-muted-foreground">
+                <span className="font-semibold">{current}</span>
+                {" / "}
+                <span className="font-semibold">{count}</span> projects
               </div>
             </div>
           </div>
         </section>
 
-        {/* Services */}
+        {/* ── Services ── */}
         <section id="services" data-scroll-section>
           <div
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="my-24 flex flex-col justify-start space-y-10"
+            className="my-16 flex flex-col justify-start space-y-10"
           >
+            <div className="space-y-3">
+              <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+                🛠 Services
+              </span>
+              <h2 className="text-4xl font-medium tracking-tight">
+                What I can do
+                <br />
+                <span className="text-gradient clash-grotesk tracking-normal">
+                  for you.
+                </span>
+              </h2>
+              <p className="max-w-md tracking-tighter text-muted-foreground">
+                End-to-end development across web, mobile, and backend — every
+                layer of the stack covered.
+              </p>
+            </div>
+
             <motion.div
               initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 1,
-                staggerChildren: 0.5,
-              }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, staggerChildren: 0.5 }}
               viewport={{ once: true }}
-              className="grid items-center gap-1.5 md:grid-cols-2 xl:grid-cols-3"
+              className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
             >
-              <div className="flex flex-col py-6 xl:p-6">
-                <h2 className="text-4xl font-medium tracking-tight">
-                  Need more info?
-                  <br />
-                  <span className="text-gradient clash-grotesk tracking-normal">
-                    I got you.
-                  </span>
-                </h2>
-                <p className="mt-2 tracking-tighter text-secondary-foreground">
-                  Here are some of the services I offer. If you have any
-                  questions, feel free to reach out.
-                </p>
-              </div>
-              {services.map((service) => (
-                <div
+              {services.map((service, i) => (
+                <motion.div
                   key={service.service}
-                  className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="group flex flex-col items-start rounded-xl border border-white/10 bg-white/5 p-8 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/10 hover:shadow-primary/5"
                 >
-                  <service.icon className="my-6 text-primary" size={20} />
-                  <span className="text-lg tracking-tight text-foreground">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary transition-colors group-hover:bg-primary/25">
+                    <service.icon size={18} />
+                  </div>
+                  <span className="text-base font-semibold tracking-tight text-foreground">
                     {service.service}
                   </span>
-                  <span className="mt-2 tracking-tighter text-muted-foreground">
+                  <span className="mt-2 text-sm leading-relaxed tracking-tight text-muted-foreground">
                     {service.description}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
 
-        {/* Contact */}
-        <section id="contact" data-scroll-section className="my-64">
+        {/* ── Contact ── */}
+        <section id="contact" data-scroll-section className="my-20">
           <div
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-16 text-center xl:py-24"
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/10 via-background to-white/5 px-8 py-16 text-center xl:py-24"
           >
-            <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">
+            {/* subtle glow */}
+            <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
+              <div className="h-[400px] w-[600px] rounded-full bg-primary/10 blur-[120px]" />
+            </div>
+
+            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+              📬 Contact
+            </span>
+            <h2 className="mt-3 text-4xl font-medium tracking-tighter xl:text-6xl">
               Let&apos;s work{" "}
               <span className="text-gradient clash-grotesk">together.</span>
             </h2>
-            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              I&apos;m currently available for freelance work and open to
-              discussing new projects.
+            <p className="mx-auto mt-3 max-w-md text-base tracking-tight text-muted-foreground xl:text-lg">
+              I&apos;m available for freelance projects and open to discussing
+              new opportunities. Drop me a message — I usually reply within 24
+              hours.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link href="mailto:md.mishab124@gmail.com" passHref>
-                <Button className="gap-2">
-                  <MessageCircle className="h-4 w-4" /> md.mishab124@gmail.com
-                </Button>
-              </Link>
-              <Link href="https://wa.me/916238661924" target="_blank" passHref>
-                <Button variant="outline" className="gap-2">
-                  <Smartphone className="h-4 w-4" /> WhatsApp
-                </Button>
-              </Link>
-              <Link href="https://www.linkedin.com/in/mishab-nk" target="_blank" passHref>
-                <Button variant="outline" className="gap-2">
-                  <Linkedin className="h-4 w-4" /> LinkedIn
-                </Button>
-              </Link>
-              <Link href="https://github.com/mishabvibes" target="_blank" passHref>
-                <Button variant="outline" className="gap-2">
-                  <Github className="h-4 w-4" /> GitHub
-                </Button>
-              </Link>
+
+            {/* contact cards grid */}
+            <div className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {contactLinks.map((c) => (
+                <Link
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith("mailto") ? undefined : "_blank"}
+                  passHref
+                  className={cn(
+                    "group flex flex-col items-center gap-2 rounded-xl border p-5 transition duration-300 hover:-translate-y-0.5",
+                    c.primary
+                      ? "border-primary/40 bg-primary/15 hover:bg-primary/25"
+                      : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10",
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-full",
+                      c.primary ? "bg-primary/30 text-primary" : "bg-white/10 text-muted-foreground group-hover:text-foreground",
+                    )}
+                  >
+                    <c.icon className="h-4 w-4" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    {c.label}
+                  </span>
+                  <span className="text-sm font-medium text-foreground">
+                    {c.value}
+                  </span>
+                </Link>
+              ))}
             </div>
+
+            {/* availability note */}
+            <p className="mt-8 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-green-400" />
+              Currently accepting new freelance projects
+            </p>
           </div>
         </section>
       </div>
