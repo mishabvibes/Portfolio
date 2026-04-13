@@ -252,7 +252,7 @@ export default function Container(props: ContainerProps) {
           </div>
 
           <Link href="/" aria-label="Mishab — Home">
-            <span className="text-lg font-semibold">mishab</span>
+            <span className="text-lg font-semibold">Mishab</span>
           </Link>
 
           {/* Desktop nav */}

@@ -26,7 +26,7 @@ export default function Footer() {
     <footer className="w-full bg-gradient-to-t from-primary/[1%] to-transparent">
       <div className="container mx-auto flex flex-row items-center justify-between py-6">
         <span className="flex flex-row items-center space-x-4">
-          <p className="text-xs text-muted-foreground">
+          {/* <p className="text-xs text-muted-foreground">
             Made with ❤️ by{" "}
             <Link
               href="https://github.com/mishabvibes"
@@ -34,14 +34,15 @@ export default function Footer() {
               passHref
               className="text-foreground transition hover:text-primary"
             >
-              mishab
+              Mishab
             </Link>
-          </p>
-          <hr className="hidden h-6 border-l border-muted md:flex" />
+          </p> */}
+
           <span className="flex hidden flex-row items-center space-x-2 md:flex">
             <p className="text-xs text-muted-foreground">Local time:</p>
             <p className="text-sm font-semibold">{time} UTC+5:30</p>
           </span>
+                    <hr className="hidden h-6 border-l border-muted md:flex" />
         </span>
         <span className="flex flex-row items-center space-x-2">
           <Link
