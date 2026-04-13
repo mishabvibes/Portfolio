@@ -1,2 +1,7 @@
 User-agent: *
 Allow: /
+
+# Block Next.js internals from indexing
+Disallow: /_next/
+
+Sitemap: https://mishab-dev.vercel.app/sitemap.xml

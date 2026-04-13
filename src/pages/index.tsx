@@ -271,6 +271,7 @@ export default function Home() {
         <section
           id="home"
           data-scroll-section
+          aria-label="Introduction"
           className="mt-40 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
         >
           <div className={styles.intro}>
@@ -342,7 +343,7 @@ export default function Home() {
               data-scroll-speed=".06"
               className="mt-6 flex flex-row items-center space-x-2"
             >
-              <Link href="mailto:md.mishab124@gmail.com" passHref>
+              <Link href="mailto:md.mishab124@gmail.com" passHref aria-label="Send email to Mishab">
                 <Button className="gap-2">
                   Get in touch <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -379,7 +380,7 @@ export default function Home() {
         </section>
 
         {/* ── About ── */}
-        <section id="about" data-scroll-section>
+        <section id="about" data-scroll-section aria-label="About Mishab">
           <div
             data-scroll
             data-scroll-speed=".4"
@@ -477,7 +478,7 @@ export default function Home() {
         </section>
 
         {/* ── Projects ── */}
-        <section id="projects" data-scroll-section>
+        <section id="projects" data-scroll-section aria-label="Portfolio projects">
           {/* gradient */}
           <div className="relative isolate -z-10">
             <div
@@ -520,7 +521,9 @@ export default function Home() {
                           <Link
                             href={project.href}
                             target="_blank"
+                            rel="noopener noreferrer"
                             passHref
+                            aria-label={`Visit ${project.title} — opens in new tab`}
                             className="relative block"
                           >
                             {/* video */}
@@ -530,6 +533,8 @@ export default function Home() {
                               loop
                               muted
                               playsInline
+                              aria-label={`${project.title} project preview`}
+                              title={`${project.title} — ${project.description}`}
                               className="aspect-video h-full w-full rounded-t-md bg-primary object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                             />
                             {/* badge overlay */}
@@ -569,7 +574,7 @@ export default function Home() {
         </section>
 
         {/* ── Services ── */}
-        <section id="services" data-scroll-section>
+        <section id="services" data-scroll-section aria-label="Services offered">
           <div
             data-scroll
             data-scroll-speed=".4"
@@ -625,7 +630,7 @@ export default function Home() {
         </section>
 
         {/* ── Contact ── */}
-        <section id="contact" data-scroll-section className="my-20">
+        <section id="contact" data-scroll-section aria-label="Contact information" className="my-20">
           <div
             data-scroll
             data-scroll-speed=".4"
@@ -657,7 +662,9 @@ export default function Home() {
                   key={c.label}
                   href={c.href}
                   target={c.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={c.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   passHref
+                  aria-label={`Contact via ${c.label}: ${c.value}`}
                   className={cn(
                     "group flex flex-col items-center gap-2 rounded-xl border p-5 transition duration-300 hover:-translate-y-0.5",
                     c.primary
@@ -666,6 +673,7 @@ export default function Home() {
                   )}
                 >
                   <div
+                    aria-hidden="true"
                     className={cn(
                       "flex h-10 w-10 items-center justify-center rounded-full",
                       c.primary ? "bg-primary/30 text-primary" : "bg-white/10 text-muted-foreground group-hover:text-foreground",
@@ -699,10 +707,12 @@ function Gradient() {
   return (
     <>
       {/* Upper gradient */}
-      <div className="absolute -top-40 right-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+      <div className="absolute -top-40 right-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
         <svg
           className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
           viewBox="0 0 1155 678"
+          aria-hidden="true"
+          focusable="false"
         >
           <path
             fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
@@ -726,10 +736,12 @@ function Gradient() {
       </div>
 
       {/* Lower gradient */}
-      <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+      <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
         <svg
           className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
           viewBox="0 0 1155 678"
+          aria-hidden="true"
+          focusable="false"
         >
           <path
             fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
