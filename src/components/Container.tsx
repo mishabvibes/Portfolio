@@ -155,13 +155,13 @@ export default function Container(props: ContainerProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Preloader
+  // Preloader — capped at 1 s to avoid blocking content on slow connections
   useEffect(() => {
     const t = setTimeout(() => {
       setIsLoading(false);
       document.body.style.cursor = "default";
       window.scrollTo(0, 0);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(t);
   }, []);
 
@@ -205,6 +205,11 @@ export default function Container(props: ContainerProps) {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:image:alt" content="Mishab — Full-Stack Developer" />
+
+        {/* ── Resource hints — speeds up font + site asset fetching ── */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://mishab-dev.vercel.app" />
 
         {/* ── Icons & Manifest ── */}
         <link rel="manifest" href="/site.webmanifest" />

@@ -108,3 +108,35 @@
     animation: blink 1s infinite;
   }
 }
+
+/* ── Performance ───────────────────────────────────────────────── */
+
+/* Promote heavy gradient overlays to their own compositing layer */
+.transform-gpu {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Sections below the fold defer layout / paint until they scroll near */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* Hero/first section — must be immediately visible, no defer */
+section:first-of-type {
+  content-visibility: visible;
+  contain-intrinsic-size: unset;
+}
+
+/* Respect the user’s OS-level “Reduce Motion” preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

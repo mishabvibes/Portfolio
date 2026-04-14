@@ -1,11 +1,10 @@
 import Container from "@/components/Container";
 import { useEffect, useRef, Suspense, useState } from "react";
+import dynamic from "next/dynamic";
 import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
 import {
   ChevronRight,
-  Code2,
-  Frame,
   SearchCheck,
   MonitorSmartphone,
   Smartphone,
@@ -23,10 +22,8 @@ import {
   UsersRound,
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
-import Spline from "@splinetool/react-spline";
 import Link from "next/link";
 import { cn, scrollTo } from "@/lib/utils";
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Carousel,
@@ -36,8 +33,14 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import VanillaTilt from "vanilla-tilt";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import ProjectVideo from "@/components/ProjectVideo";
+
+// Use next/dynamic with ssr: false for client-only components
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => <span className="sr-only">Loading 3D scene…</span>,
+});
 
 const aboutStats = [
   { label: "Years of experience", value: "3+" },
@@ -191,19 +194,37 @@ const contactLinks = [
   },
 ];
 
+/** Returns true on coarse-pointer (touch) devices */
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
+  return isMobile;
+}
+
 export default function Home() {
   const refScrollContainer = useRef(null);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
+  const [mounted, setMounted] = useState(false);
+  const isMobile = useIsMobile();
+  const shouldReduceMotion = useReducedMotion();
 
-  // handle scroll
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // handle scroll + locomotive (desktop only)
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-link");
 
     async function getLocomotive() {
+      // Skip locomotive on mobile — native scroll is faster
+      if (isMobile) return;
       const Locomotive = (await import("locomotive-scroll")).default;
       new Locomotive({
         el: refScrollContainer.current ?? new HTMLElement(),
@@ -231,12 +252,12 @@ export default function Home() {
     }
 
     void getLocomotive();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -249,18 +270,22 @@ export default function Home() {
     });
   }, [carouselApi]);
 
-  // card hover effect
+  // VanillaTilt — desktop only (gyroscope + GPU compositing hurts mobile perf)
   useEffect(() => {
-    const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
-    VanillaTilt.init(tilt, {
-      speed: 300,
-      glare: true,
-      "max-glare": 0.1,
-      gyroscope: true,
-      perspective: 900,
-      scale: 0.9,
+    if (isMobile) return;
+    // Dynamic import to avoid adding it to the mobile bundle
+    import("vanilla-tilt").then(({ default: VanillaTilt }) => {
+      const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
+      VanillaTilt.init(tilt, {
+        speed: 300,
+        glare: true,
+        "max-glare": 0.1,
+        gyroscope: false, // gyroscope on mobile drains battery
+        perspective: 900,
+        scale: 0.9,
+      });
     });
-  }, []);
+  }, [isMobile]);
 
   return (
     <Container>
@@ -367,16 +392,17 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            data-scroll
-            data-scroll-speed="-.01"
-            id={styles["canvas-container"]}
-            className="mt-14 h-full w-full xl:mt-0"
-          >
-            <Suspense fallback={<span>Loading...</span>}>
+          {/* Spline 3D — desktop only; skip on mobile to save ~340KB + CPU */}
+          {mounted && !isMobile && (
+            <div
+              data-scroll
+              data-scroll-speed="-.01"
+              id={styles["canvas-container"]}
+              className="mt-14 h-full w-full xl:mt-0"
+            >
               <Spline scene="/assets/scene.splinecode" />
-            </Suspense>
-          </div>
+            </div>
+          )}
         </section>
 
         {/* ── About ── */}
@@ -445,9 +471,9 @@ export default function Home() {
                 {experience.map((exp, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.15, duration: 0.6 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                    whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+                    transition={{ delay: shouldReduceMotion ? 0 : i * 0.15, duration: shouldReduceMotion ? 0 : 0.6 }}
                     viewport={{ once: true }}
                     className="flex gap-4 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-primary/30 hover:bg-white/8"
                   >
@@ -526,16 +552,11 @@ export default function Home() {
                             aria-label={`Visit ${project.title} — opens in new tab`}
                             className="relative block"
                           >
-                            {/* video */}
-                            <video
+                            {/* Lazy video — loads only when scrolled into view */}
+                            <ProjectVideo
                               src={project.image}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              aria-label={`${project.title} project preview`}
+                              label={`${project.title} project preview`}
                               title={`${project.title} — ${project.description}`}
-                              className="aspect-video h-full w-full rounded-t-md bg-primary object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                             />
                             {/* badge overlay */}
                             <span className="absolute right-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
@@ -599,18 +620,18 @@ export default function Home() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, staggerChildren: 0.5 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: -10 }}
+              whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.7 }}
               viewport={{ once: true }}
               className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
             >
               {services.map((service, i) => (
                 <motion.div
                   key={service.service}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                  whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+                  transition={{ delay: shouldReduceMotion ? 0 : i * 0.1, duration: shouldReduceMotion ? 0 : 0.5 }}
                   viewport={{ once: true }}
                   className="group flex flex-col items-start rounded-xl border border-white/10 bg-white/5 p-8 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/10 hover:shadow-primary/5"
                 >
