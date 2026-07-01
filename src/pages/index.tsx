@@ -122,6 +122,13 @@ const projects = [
     href: "https://rahathayurvedic.vercel.app",
     badge: "Web",
   },
+  {
+    title: "Dihana Febin",
+    description: "Digital Marketer Portfolio",
+    image: "/assets/DihanaPortfolio.webm",
+    href: "https://dihanafebin.vercel.app",
+    badge: "Web",
+  },
 ];
 
 const services = [
