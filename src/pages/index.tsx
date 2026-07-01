@@ -406,13 +406,8 @@ export default function Home() {
         </section>
 
         {/* ── About ── */}
-        <section id="about" data-scroll-section aria-label="About Mishab">
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="my-10 flex max-w-6xl flex-col justify-start space-y-16"
-          >
+        <section id="about" data-scroll-section aria-label="About Mishab" className="py-12">
+          <div className="flex max-w-6xl flex-col justify-start space-y-16">
             {/* Headline + stats */}
             <div className="space-y-10">
               <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
@@ -504,24 +499,10 @@ export default function Home() {
         </section>
 
         {/* ── Projects ── */}
-        <section id="projects" data-scroll-section aria-label="Portfolio projects">
+        <section id="projects" data-scroll-section aria-label="Portfolio projects" className="py-12">
           {/* gradient */}
-          <div className="relative isolate -z-10">
-            <div
-              className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-              aria-hidden="true"
-            >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-          </div>
 
-          <div data-scroll data-scroll-speed=".4" className="my-20">
+          <div>
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
               🚀 Projects
             </span>
@@ -595,13 +576,8 @@ export default function Home() {
         </section>
 
         {/* ── Services ── */}
-        <section id="services" data-scroll-section aria-label="Services offered">
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="my-16 flex flex-col justify-start space-y-10"
-          >
+        <section id="services" data-scroll-section aria-label="Services offered" className="py-12">
+          <div className="flex flex-col justify-start space-y-10">
             <div className="space-y-3">
               <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                 🛠 Services
@@ -651,13 +627,8 @@ export default function Home() {
         </section>
 
         {/* ── Contact ── */}
-        <section id="contact" data-scroll-section aria-label="Contact information" className="my-20">
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/10 via-background to-white/5 px-8 py-16 text-center xl:py-24"
-          >
+        <section id="contact" data-scroll-section aria-label="Contact information" className="py-12">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/10 via-background to-white/5 px-8 py-16 text-center xl:py-24">
             {/* subtle glow */}
             <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
               <div className="h-[400px] w-[600px] rounded-full bg-primary/10 blur-[120px]" />
